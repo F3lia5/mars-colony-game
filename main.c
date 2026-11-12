@@ -31,6 +31,7 @@ int main(void) {
   srand(time(NULL));
 
   char secim;
+  char komut;
   int gecerli;
   do {
     gecerli = 1;
@@ -76,4 +77,52 @@ int main(void) {
     }
 
   } while (gecerli == 0);
+  do {
+    turHarcandi = 1;
+
+    printf("\n--- Gun: %d/15 | Tur: %d ---\n", gun, tur);
+    printf("Komut (G,O,T,D,U,K,H,Q): ");
+    scanf(" %c", &komut);
+
+    switch (komut) {
+
+    case 'd':
+    case 'D':
+
+      // buraya durum raporu gelcek
+      printf("Durum raporu testi");
+      turHarcandi = 0;
+      break;
+    case 'q':
+    case 'Q':
+      oyunaDevam = 0;
+      turHarcandi = 0;
+      break;
+    default:
+      printf("Tanimsiz komut!\n");
+      turHarcandi = 0;
+    }
+    if (turHarcandi == 1) {
+
+      tur++;
+      if (tur % 3 == 0) {
+
+        gun++;
+        oksijen -= 8;
+        if (modulHasar > 70)
+
+          saglik -= 5;
+      }
+    }
+    sinirla();
+
+    if (saglik <= 0 || oksijen <= 0) {
+      printf("Kaybettin!\n");
+      oyunaDevam = 0;
+    } else if (gun > 15) {
+      printf("Kurtarma ekibi geldi! Kazandin! \n");
+      oyunaDevam = 0;
+    }
+  } while (oyunaDevam == 1);
+  return 0;
 }
