@@ -88,11 +88,33 @@ int main(void) {
 
     case 'd':
     case 'D':
-
       // buraya durum raporu gelcek
       printf("Durum raporu testi");
       turHarcandi = 0;
       break;
+
+    case 'U':
+    case 'u':
+      if (enerji < 100) {
+        enerji += 25;
+        oksijen -= 5;
+        printf("Bu gece uyuyorsun\n");
+        if (oksijen < 20) {
+          saglik -= 5;
+          printf("Bogularak uyandin!\n");
+          printf("Saglik -5\n");
+          printf("Oksijen az!\n");
+        } else {
+          saglik += 5;
+          printf("Dinlendin ve canin artti! \n");
+          printf("Saglik +5\n");
+        }
+      } else {
+        printf("Enerjin tamamen dolu uyuyamiyorsun! \n");
+        turHarcandi = 0;
+      }
+      break;
+
     case 'q':
     case 'Q':
       oyunaDevam = 0;
@@ -103,17 +125,15 @@ int main(void) {
       turHarcandi = 0;
     }
     if (turHarcandi == 1) {
-
       tur++;
       if (tur % 3 == 0) {
-
         gun++;
         oksijen -= 8;
         if (modulHasar > 70)
-
           saglik -= 5;
       }
     }
+
     sinirla();
 
     if (saglik <= 0 || oksijen <= 0) {
